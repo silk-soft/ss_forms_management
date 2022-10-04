@@ -3,7 +3,8 @@
     <data>
         <template id="ss_login" inherit_id="web.login" name="Centamin Demo" >
              <xpath expr="//form[hasclass('oe_login_form')]" position="after">
-                <div style="text-align : center;color: #35979c;">
+                <br/>
+                <div style="color: #35979c;" class="text-center mt-4 pt-3 border-top">
                     <p>
                         This is a demo Odoo DB requested by
                     </p>
