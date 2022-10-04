@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_observation_form_admin,observation.form,model_observation_form,ss_forms_management.group_observation_form_admin,1,1,1,0
+access_observation_form_user,observation.form,model_observation_form,ss_forms_management.group_observation_form_user,1,1,1,0
+access_observation_form_superuser,observation.form,model_observation_form,base.group_erp_manager,1,1,1,1

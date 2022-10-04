@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="ss_login" inherit_id="web.login" name="Centamin Demo" >
+             <xpath expr="//form[hasclass('oe_login_form')]" position="after">
+                <div style="text-align : center;color: #35979c;">
+                    <p>
+                        This is a demo Odoo DB requested by
+                    </p>
+                    <p>
+                        Mr. Hussien Selim for Centamin SGM
+                    </p>
+                    <p>
+                        For more info, please contact us.
+                    </p>
+                    <a href="mailto: info@silksoft.org">
+                        info@silksoft.org
+                    </a>
+                </div>
+            </xpath>
+        </template>
+        <record id="silksoft_observation_format" model="report.paperformat">
+            <field name="name">SilkSoft Observation Format</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">36</field>
+            <field name="dpi">90</field>
+        </record>
+        <template id="silksoft_header_view">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div class="row  mt32 mb32">
+                    <table class="table table-sm o_main_table" style="width: 100%;table-layout: fixed;font-weight: bold;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid black;">
+                                <th scope="col" rowspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    <img class="col" t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 130px;max-width: 150px;vertical-align : middle;text-align:center;" alt="Logo"/>
+                                </th>
+                                <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Planned Task Observation (PTO)
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    HSE Department
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    SGM-HSE-FRM-0144
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Forms
+                                </th>
+                            </tr>
+                            <tr style="vertical-align: center;border-bottom: 1px solid black;">
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Rev No.
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Issue Date
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Author
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Approved By
+                                </th>
+                                <th scope="col" rowspan="2" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Pages: <span class="page"/> / <span class="topage"/>
+                                </th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black;">
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    03
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    2021-01-11
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    HSE Dept.
+                                </th>
+                                <th scope="col" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;">
+                                    Mohamed Moneer
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <div t-if="report_type == 'pdf'" style="color: red;">
+                        ONCE PRINTED, THIS DOCUMENT IS DEEMED “UNCONTROLLED COPY”
+                    </div>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="silksoft_header">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="ss_forms_management.silksoft_header_view"><t t-raw="0"/></t>
+        </template>
+        <record id="silksoft_observation_form_pdf" model="ir.actions.report">
+            <field name="name">Observation Form</field>
+            <field name="model">observation.form</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ss_forms_management.observation_report</field>
+            <field name="report_file">ss_forms_management.observation_report</field>
+            <field name="print_report_name">'Observation Form - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_observation_form"/>
+            <field name="paperformat_id" ref="silksoft_observation_format"/>
+        </record>
+    </data>
+</odoo>

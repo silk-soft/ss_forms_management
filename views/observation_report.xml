@@ -1,0 +1,1584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="observation_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="company" t-value="o.observer_name.company_id" />
+                    <t t-call="ss_forms_management.silksoft_header_view"/>
+                    <t t-call="web.external_layout">
+                        <div class="page" style="min-height: 620px;">
+                            <table colspan="6" class="table" style="width: 100%;table-layout: fixed;font-weight: bold;margin-top:-40px;">
+                                <thead style="display: table-row-group">
+                                    <tr>
+                                        <th scope="col" colspan="6" style="border-collapse: collapse;border: 1px solid black;vertical-align : left;text-align:left;background-color: red;padding: 10px;color: white;">
+                                            The fields that contain (*) are mandatory to be filled.<br/>
+                                            The custom field is changed according to the task observed.<br/>
+                                            The custom field is done by the observer.
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;padding: 10px;background: lightgray;">
+                                            Details of Observation<br/>
+                                            تفاصيل المهمة الملاحظة
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            Date:<br/>
+                                            التاريخ
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-esc="o.date_time.date()"/>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            Time:<br/>
+                                            الوقت
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-esc="o.date_time.time()"/>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            Location:<br/>
+                                            الموقع
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-esc="o.location"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="1" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            Description of Task:<br/>
+                                            وصف المهمة
+                                        </th>
+                                        <th scope="col" colspan="5" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-esc="o.description"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            Observer Name:<br/>
+                                            اسم الملاحظ
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-esc="o.observer_name.name"/>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            ID No:
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-if="o.observer_name.pin">
+                                                <t t-esc="o.observer_name.pin"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;">
+                                            Position:
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-if="o.observer_name.job_id.name">
+                                                <t t-esc="o.observer_name.job_id.name"/>
+                                            </t>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            Employee’s Details:<br/>
+                                            بيانات الموظف
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-esc="o.employee_name.name"/>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            ID No:
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-if="o.employee_name.pin">
+                                                <t t-esc="o.employee_name.pin"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;">
+                                            Position:
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                            <t t-if="o.employee_name.job_id.name">
+                                                <t t-esc="o.employee_name.job_id.name"/>
+                                            </t>
+                                        </th>
+                                    </tr>
+                                    <t t-if="o.observation_team">
+                                        <tr>
+                                            <th scope="col" rowspan="3" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                                Observation Team:<br/>
+                                                فريق الملاحظة
+                                            </th>
+                                            <th scope="col" colspan="2" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                Name: <t t-if="o.team_member_1.name"><t t-esc="o.team_member_1.name"/></t>
+                                            </th>
+                                            <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                ID No: <t t-if="o.team_member_1.pin"><t t-esc="o.team_member_1.pin"/></t>
+                                            </th>
+                                            <th scope="col" colspan="2" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                Position: <t t-if="o.team_member_1.job_id.name"><t t-esc="o.team_member_1.job_id.name"/></t>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" colspan="2" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                Name: <t t-if="o.team_member_2.name"><t t-esc="o.team_member_2.name"/></t>
+                                            </th>
+                                            <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                ID No: <t t-if="o.team_member_2.pin"><t t-esc="o.team_member_2.pin"/></t>
+                                            </th>
+                                            <th scope="col" colspan="2" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                Position: <t t-if="o.team_member_2.job_id.name"><t t-esc="o.team_member_2.job_id.name"/></t>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" colspan="2" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                Name: <t t-if="o.team_member_3.name"><t t-esc="o.team_member_3.name"/></t>
+                                            </th>
+                                            <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                ID No: <t t-if="o.team_member_3.pin"><t t-esc="o.team_member_3.pin"/></t>
+                                            </th>
+                                            <th scope="col" colspan="2" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" >
+                                                Position: <t t-if="o.team_member_3.job_id.name"><t t-esc="o.team_member_3.job_id.name"/></t>
+                                            </th>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;padding: 10px;background: lightgray;">
+                                            Evaluation of Task Observation<br/>
+                                            تقييم ملاحظة المهمة
+                                        </th>
+                                    </tr>
+                                    <tr style="font-size : 12px;">
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            References to use<br/>
+                                            الرموز المستخدمه
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C = Compliant<br/>
+                                            متوافق
+                                        </th>
+                                        <th scope="col" colspan="2" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN = Unacceptable<br/>
+                                            غير مقبول <br/>
+                                            (Stop Work &amp; Take immediate action)<br/>
+                                            (توقف عن العمل واتخاذ إجراء فورًا)
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI = Need Improvement<br/>
+                                            (But safe to continue)<br/>
+                                            يلزم تحسين<br/>
+                                            (لكن من الآمن أن يستمر في عمله)
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A = Not Applicable<br/>
+                                            لا ينطبق
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;background: black;color : white;">
+                                            1.  *Documents:<br/>
+                                            الوثائق والورقيات
+                                        </th>
+                                        <th scope="col" colspan="2" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;background: black;color : white;">
+                                            Comments<br/>
+                                            التعليقات
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <table colspan="14" class="table" style="width: 100%;table-layout: fixed;font-weight: bold;margin-top:-15px;">
+                                <thead style="display: table-row-group">
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;background: lightgray;">
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-left: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;background: lightgray;">
+                                        </th>
+                                    </tr>
+                                    <!--                 Start of survey sections                   -->
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_1'].string"/><br/>
+                                            هل يوجد خطوات عمل قياسية آمنة للمهمة؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_1 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_1 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_1 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_1 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_1"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_2'].string"/><br/>
+                                            هل تم تحليل مخاطر المهمة ؟ (نموذج تحليل المخاطر و تيك فايف)؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_2 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_2 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_2 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_2 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_2"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_3'].string"/><br/>
+                                            هل تم توقيع نموذج تحليل المخاطر بواسطة جميع العاملين؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_3 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_3 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_3 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_3 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_3"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_4'].string"/><br/>
+                                            هل تم التعرف على جميع تصاريح العمل المطلوبة وتم تصريحها؟ اذا كانت الاجابة نعم اكتب تصاريح العمل التي تم عملها
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_4 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_4 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_4 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_4 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_4"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_5'].string"/><br/>
+                                            هل تم ملئ تصاريح العمل بشكل صحيح؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_5 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_5 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_5 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_5 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_5"/>
+                                        </th>
+                                    </tr>
+                                    <!--                  End of section one                  -->
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;background: black;color : white;">
+                                            2.  *Hazard Awareness<br/>
+                                            معرفة مخاطر المهمة
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;background: black;color : white;">
+                                            Comments<br/>
+                                            التعليقات
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;background: lightgray;">
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-left: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;background: lightgray;">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_6'].string"/><br/>
+                                            هل تعرفت على جميع مخاطر المهمة؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_6 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_6 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_6 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_6 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_6"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_7'].string"/><br/>
+                                            هل تم عزل كل مصادر الطاقة طبقا لسياسة عزل موقع السكري؟ اذا كانت الاجابة نعم اذكر المصادر التي تم عزلها.
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_7 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_7 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_7 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_7 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_7"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_8'].string"/><br/>
+                                            هل هناك اي مخاطر كيميائية؟ اذا كانت الاجابه نعم. اذكرهم
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_8 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_8 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_8 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_8 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_8"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_9'].string"/><br/>
+                                            هل العامل القائم بالمهمة على دراية بخطورة المواد الكيميائية الموجودة؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_9 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_9 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_9 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_9 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_9"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_10'].string"/><br/>
+                                            هل مكان العمل أمن لاكماله؟ (حائط مائل، حالة الطقس، حاجز صلب او شريط، تطبيق اداره المرور، استخدام علامات ارشادية....الخ)
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_10 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_10 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_10 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_10 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_10"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_11'].string"/><br/>
+                                            ما هي الضوابط المطبقة؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_11 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_11 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_11 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_11 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_11"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_12'].string"/><br/>
+                                            هل يتم الحفاظ على مكان العمل مرتب ونظيف طوال مدة العمل؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_12 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_12 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_12 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_12 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_12"/>
+                                        </th>
+                                    </tr>
+                                    <!--                  End of section two                  -->
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;background: black;color : white;">
+                                            3.	*PPE:<br/>
+                                            مهمات الوقاية الشخصية
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;background: black;color : white;">
+                                            Comments<br/>
+                                            التعليقات
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;background: lightgray;">
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-left: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;background: lightgray;">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_13'].string"/><br/>
+                                            هل العامل يرتدي مهمات الوقاية الصحيحة للمهمة؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_13 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_13 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_13 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_13 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_13"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_14'].string"/><br/>
+                                            هل حالة مهمات الوقاية المستخدمة جيدة؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_14 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_14 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_14 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_14 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_14"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_15'].string"/><br/>
+                                            هل يتم أستخدام مهمات الوقاية بشكل صحيح؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_15 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_15 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_15 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_15 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_15"/>
+                                        </th>
+                                    </tr>
+                                    <!--                  End of section three                  -->
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;background: black;color : white;">
+                                            4.	* Employee Competency &amp;Training: <br/>
+                                            كفاءة وتدريب العامل
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;background: black;color : white;">
+                                            Comments<br/>
+                                            التعليقات
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;background: lightgray;">
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-left: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;background: lightgray;">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_16'].string"/><br/>
+                                            هل تطلب المهمة فحص تدريب مشروط لعمل المهمة؟ ( رخصة تشغيل معدة، تدريب العمل على ارتفاعات او بمكان مغلق ...الخ) اذا كانت الاجابه نعم؟ اذكر التفاصيل
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_16 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_16 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_16 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_16 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_16"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_17'].string"/><br/>
+                                            هل اكمل العامل التدريبات المشترطة لأداء المهمة؟ وهل تاريخ التدريب صالح؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_17 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_17 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_17 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_17 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_17"/>
+                                        </th>
+                                    </tr>
+                                    <!--                  End of section four                  -->
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;background: black;color : white;">
+                                            5.	* Tools and Equipment:<br/>
+                                            الأدوات والمعدات
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;background: black;color : white;">
+                                            Comments<br/>
+                                            التعليقات
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;background: lightgray;">
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-left: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;background: lightgray;">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_18'].string"/><br/>
+                                            هل يتم استخدام الادوات والمعدات الصحيحة لأداء المهمة؟ اذا كانت الاجابه لا ؟ اذكر التفاصيل
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_18 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_18 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_18 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_18 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_18"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_19'].string"/><br/>
+                                            هل حالة الأدوات والمعدات المسخدمة جيدة؟ اذا كانت الاجابه لا ؟ اذكر التفاصيل
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_19 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_19 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_19 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_19 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_19"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_20'].string"/><br/>
+                                            هل يتم استخدام المعدات والادوات بطريقة صحيحة؟ اذا كانت الاجابه لا ؟ اذكر التفاصيل
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_20 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_20 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_20 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_20 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_20"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_21'].string"/><br/>
+                                            هل كل الادوات الكهربائية والمعدات المستخدمه بها كود الفحص اللوني للفتره الحالية؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_21 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_21 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_21 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_21 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_21"/>
+                                        </th>
+                                    </tr>
+                                    <!--                  End of section five                  -->
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;background: black;color : white;">
+                                            6.	*Supervision/Communication:<br/>
+                                                التواصل
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;background: black;color : white;">
+                                            Comments<br/>
+                                            التعليقات
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;background: lightgray;">
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-left: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;background: lightgray;">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_22'].string"/><br/>
+                                            هل تم إشراك المشرف في عملية تحديد المخاطر؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_22 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_22 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_22 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_22 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_22"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_23'].string"/><br/>
+                                            هل يفهم العامل مهمتة بشكل واضح؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_23 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_23 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_23 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_23 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_23"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_24'].string"/><br/>
+                                            هل يوجد تواصل مناسب بين فريق العمل (راديو- تواصل بصري – سمعي)؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_24 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_24 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_24 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_24 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_24"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_25'].string"/><br/>
+                                            هل يوجد مهمات مشابهه؟ هل افراد عمل المهمات على تواصل؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_25 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_25 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_25 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_25 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_25"/>
+                                        </th>
+                                    </tr>
+                                    <!--                  End of section six                  -->
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;background: black;color : white;">
+                                            7.	*Emergency Response:<br/>
+                                                الاستجابة للطوارئ
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;background: black;color : white;">
+                                            Comments<br/>
+                                            التعليقات
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;background: lightgray;">
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-left: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            C
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            UN
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            NI
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">
+                                            N/A
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;background: lightgray;">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_26'].string"/><br/>
+                                            هل العامل على دراية بما يجب فعله في حاله الطوارئ؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_26 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_26 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_26 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_26 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_26"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_27'].string"/><br/>
+                                            هل العامل قادر على اخطار فريق استجابه الطوارئ؟ وما الوسائل؟ (تليفون – راديو- ... الخ)؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_27 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_27 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_27 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_27 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_27"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="6" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-esc="o._fields['question_28'].string"/><br/>
+                                            هل يعرف العامل اين تقع اقرب طفاية حريق و دش غسيل الجسم والعيون (سيفتي شاور) ؟
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_28 == 'c'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_28 == 'un'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_28 == 'ni'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" style="vertical-align : middle;text-align : center;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;">
+                                            <t t-if="o.question_28 == 'n/a'">
+                                                <input type="checkbox" checked="true"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="checkbox"/>
+                                            </t>
+                                        </th>
+                                        <th scope="col" colspan="4" style="vertical-align : middle;text-align : left;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                            <t t-esc="o.comment_28"/>
+                                        </th>
+                                    </tr>
+                                    <!--                  End of section seven                  -->
+                                    <tr>
+                                        <th scope="col" colspan="14" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;padding: 10px;background: lightgray;">
+                                            Signatures التوقيعات
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;padding: 10px;">
+                                            Signature of the Observer<br/>
+                                            توقيع الملاحظ
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;padding: 10px;">
+
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;padding: 10px;">
+                                            Signature of the employee being observed<br/>
+                                            توقيع العامل القائم بالمهمة
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;padding: 10px;">
+
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;padding: 10px;">
+                                            Signature of HOD<br/>
+                                            توقيع رئيس القسم
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;padding: 10px;">
+
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col" colspan="10" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:left;padding: 10px;">
+                                            Signature of HSE Manager<br/>
+                                            توقيع مدير السلامة والصحة المهنية والبيئة
+                                        </th>
+                                        <th scope="col" colspan="4" style="border-collapse: collapse;border: 1px solid black;vertical-align : middle;text-align:center;padding: 10px;">
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

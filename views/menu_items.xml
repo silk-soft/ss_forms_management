@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_fm_root"
+        name="Forms Management"
+        web_icon="fm,static/description/icon.png"
+        groups="group_observation_form_admin,group_observation_form_user"
+        action="action_view_observation_form"
+        sequence="25"/>
+    <menuitem id="submenu_fm" name="Forms" parent="menu_fm_root" action="action_view_observation_form" sequence="1" groups="group_observation_form_admin,group_observation_form_user"/>
+</odoo>
