@@ -3,7 +3,7 @@
     <menuitem
         id="menu_fm_root"
         name="Forms Management"
-        web_icon="fm,static/description/icon.png"
+        web_icon="ss_forms_management,static/description/icon.png"
         groups="group_observation_form_admin,group_observation_form_user"
         action="action_view_observation_form"
         sequence="25"/>
