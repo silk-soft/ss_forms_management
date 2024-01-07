@@ -21,109 +21,109 @@
                         </div>
                         <group>
                             <group>
-                                <field name="date_time"/>
-                                <field name="location"/>
-                                <field name="description"/>
+                                <field name="date_time" readonly="state != 'draft'"/>
+                                <field name="location" readonly="state != 'draft'"/>
+                                <field name="description" readonly="state != 'draft'"/>
                             </group>
                             <group>
-                                <field name="observer_name"/>
-                                <field name="employee_name"/>
-                                <field name="observation_team"/>
-                                <field name="team_member_1" invisible="'observation_team' == False" required="'observation_team' == True"/>
-                                <field name="team_member_2" invisible="'observation_team' == False"/>
-                                <field name="team_member_3" invisible="'observation_team' == False"/>
+                                <field name="observer_name" readonly="state != 'draft'"/>
+                                <field name="employee_name" readonly="state != 'draft'"/>
+                                <field name="observation_team" readonly="state != 'draft'"/>
+                                <field name="team_member_1" invisible="observation_team == False" required="observation_team == True" readonly="state != 'draft'"/>
+                                <field name="team_member_2" invisible="observation_team == False" readonly="state != 'draft'"/>
+                                <field name="team_member_3" invisible="observation_team == False" readonly="state != 'draft'"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Documents" name="document_section" autofocus="autofocus">
                                 <group>
                                     <div/>
-                                    <field name="question_1" widget="selection_badge"/>
-                                    <field name="comment_1"/>
-                                    <field name="question_2" widget="selection_badge"/>
-                                    <field name="comment_2"/>
-                                    <field name="question_3" widget="selection_badge"/>
+                                    <field name="question_1" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_1" readonly="state != 'draft'"/>
+                                    <field name="question_2" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_2" readonly="state != 'draft'"/>
+                                    <field name="question_3" widget="selection_badge" readonly="state != 'draft'"/>
                                     <field name="comment_3"/>
-                                    <field name="question_4" widget="selection_badge"/>
-                                    <field name="comment_4"/>
-                                    <field name="question_5" widget="selection_badge"/>
-                                    <field name="comment_5"/>
+                                    <field name="question_4" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_4" readonly="state != 'draft'"/>
+                                    <field name="question_5" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_5" readonly="state != 'draft'"/>
                                 </group>
                             </page>
                             <page string="Hazard Awareness" name="hazard_section">
                                 <group>
                                     <div/>
-                                    <field name="question_6" widget="selection_badge"/>
-                                    <field name="comment_6"/>
-                                    <field name="question_7" widget="selection_badge"/>
-                                    <field name="comment_7"/>
-                                    <field name="question_8" widget="selection_badge"/>
-                                    <field name="comment_8"/>
-                                    <field name="question_9" widget="selection_badge"/>
-                                    <field name="comment_9"/>
-                                    <field name="question_10" widget="selection_badge"/>
-                                    <field name="comment_10"/>
-                                    <field name="question_11" widget="selection_badge"/>
-                                    <field name="comment_11"/>
-                                    <field name="question_12" widget="selection_badge"/>
-                                    <field name="comment_12"/>
+                                    <field name="question_6" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_6" readonly="state != 'draft'"/>
+                                    <field name="question_7" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_7" readonly="state != 'draft'"/>
+                                    <field name="question_8" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_8" readonly="state != 'draft'"/>
+                                    <field name="question_9" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_9" readonly="state != 'draft'"/>
+                                    <field name="question_10" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_10" readonly="state != 'draft'"/>
+                                    <field name="question_11" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_11" readonly="state != 'draft'"/>
+                                    <field name="question_12" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_12" readonly="state != 'draft'"/>
                                 </group>
                             </page>
                             <page string="PPE" name="ppe_section">
                                 <group>
                                     <div/>
-                                    <field name="question_13" widget="selection_badge"/>
-                                    <field name="comment_13"/>
-                                    <field name="question_14" widget="selection_badge"/>
-                                    <field name="comment_14"/>
-                                    <field name="question_15" widget="selection_badge"/>
-                                    <field name="comment_15"/>
+                                    <field name="question_13" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_13" readonly="state != 'draft'"/>
+                                    <field name="question_14" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_14" readonly="state != 'draft'"/>
+                                    <field name="question_15" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_15" readonly="state != 'draft'"/>
                                 </group>
                             </page>
                             <page string="Competency &amp; Training" name="competency_section">
                                 <group>
                                     <div/>
-                                    <field name="question_16" widget="selection_badge"/>
-                                    <field name="comment_16"/>
-                                    <field name="question_17" widget="selection_badge"/>
-                                    <field name="comment_17"/>
+                                    <field name="question_16" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_16" readonly="state != 'draft'"/>
+                                    <field name="question_17" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_17" readonly="state != 'draft'"/>
                                 </group>
                             </page>
                             <page string="Tools &amp; Equipment" name="tools_section">
                                 <group>
                                     <div/>
-                                    <field name="question_18" widget="selection_badge"/>
-                                    <field name="comment_18"/>
-                                    <field name="question_19" widget="selection_badge"/>
-                                    <field name="comment_19"/>
-                                    <field name="question_20" widget="selection_badge"/>
-                                    <field name="comment_20"/>
-                                    <field name="question_21" widget="selection_badge"/>
-                                    <field name="comment_21"/>
+                                    <field name="question_18" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_18" readonly="state != 'draft'"/>
+                                    <field name="question_19" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_19" readonly="state != 'draft'"/>
+                                    <field name="question_20" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_20" readonly="state != 'draft'"/>
+                                    <field name="question_21" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_21" readonly="state != 'draft'"/>
                                 </group>
                             </page>
                             <page string="Supervision/Communication" name="supervision_section">
                                 <group>
                                     <div/>
-                                    <field name="question_22" widget="selection_badge"/>
-                                    <field name="comment_22"/>
-                                    <field name="question_23" widget="selection_badge"/>
-                                    <field name="comment_23"/>
-                                    <field name="question_24" widget="selection_badge"/>
-                                    <field name="comment_24"/>
-                                    <field name="question_25" widget="selection_badge"/>
-                                    <field name="comment_25"/>
+                                    <field name="question_22" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_22" readonly="state != 'draft'"/>
+                                    <field name="question_23" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_23" readonly="state != 'draft'"/>
+                                    <field name="question_24" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_24" readonly="state != 'draft'"/>
+                                    <field name="question_25" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_25" readonly="state != 'draft'"/>
                                 </group>
                             </page>
                             <page string="Emergency Response" name="response_section">
                                 <group>
                                     <div/>
-                                    <field name="question_26" widget="selection_badge"/>
-                                    <field name="comment_26"/>
-                                    <field name="question_27" widget="selection_badge"/>
-                                    <field name="comment_27"/>
-                                    <field name="question_28" widget="selection_badge"/>
-                                    <field name="comment_28"/>
+                                    <field name="question_26" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_26" readonly="state != 'draft'"/>
+                                    <field name="question_27" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_27" readonly="state != 'draft'"/>
+                                    <field name="question_28" widget="selection_badge" readonly="state != 'draft'"/>
+                                    <field name="comment_28" readonly="state != 'draft'"/>
                                 </group>
                             </page>
                         </notebook>
