@@ -29,9 +29,9 @@
                                 <field name="observer_name"/>
                                 <field name="employee_name"/>
                                 <field name="observation_team"/>
-                                <field name="team_member_1" attrs="{'invisible': [('observation_team', '==', False)],'required': [('observation_team', '==', True)]}"/>
-                                <field name="team_member_2" attrs="{'invisible': [('observation_team', '==', False)]}"/>
-                                <field name="team_member_3" attrs="{'invisible': [('observation_team', '==', False)]}"/>
+                                <field name="team_member_1" invisible="'observation_team' == False" required="'observation_team' == True"/>
+                                <field name="team_member_2" invisible="'observation_team' == False"/>
+                                <field name="team_member_3" invisible="'observation_team' == False"/>
                             </group>
                         </group>
                         <notebook>
