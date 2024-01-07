@@ -3,7 +3,7 @@
 
 {
     'name': 'SilkSoft Form Management',
-    'version': '15.0.1.0.0',
+    'version': '17.0.1.0.0',
     'category': 'Productivity/Forms',
     'summary': 'Demo module for Sukari Gold Mine management',
     'sequence': '5',
